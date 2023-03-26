@@ -1,5 +1,12 @@
-import { Button, ScrollArea, Table } from "@mantine/core";
-import { IconDatabase, IconTrash } from "@tabler/icons-react";
+import {
+  Badge,
+  Button,
+  ScrollArea,
+  Select,
+  Switch,
+  Table,
+} from "@mantine/core";
+import { IconTrash } from "@tabler/icons-react";
 import { IEmployee } from "../../../App";
 
 type AppTableProps<T> = {
@@ -13,8 +20,14 @@ function AppTable({ data }: AppTableProps<IEmployee>) {
       <td>{row.email}</td>
       <td>{row.designation}</td>
       <td>{row.age}</td>
-      <td>{row.status}</td>
-      <td>{row.type}</td>
+      <td>
+        <Switch size="sm" checked={row.status === "active"} />
+      </td>
+      <td>
+        <Badge color={row.type == "full-time" ? "green" : "blue"}>
+          {row.type}
+        </Badge>
+      </td>
       <td style={{ textAlign: "center" }} onClick={() => alert("Hello")}>
         <Button leftIcon={<IconTrash size="1rem" />}>Delete</Button>
       </td>
@@ -33,7 +46,7 @@ function AppTable({ data }: AppTableProps<IEmployee>) {
         }}
         highlightOnHover
       >
-        <thead>
+        <thead style={{ padding: "5px" }}>
           <tr>
             <th>Name</th>
             <th>Email</th>
